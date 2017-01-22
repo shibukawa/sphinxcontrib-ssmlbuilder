@@ -17,7 +17,7 @@ requires = [
 setup(
     name='sphinxcontrib-ssmlbuilder',
     version='0.1',
-    url='http://bitbucket.org/birkenfeld/sphinx-contrib',
+    url='https://github.com/shibukawa/sphinxcontrib-ssmlbuilder',
     download_url='http://pypi.python.org/pypi/sphinxcontrib-ssmlbuilder',
     license='BSD',
     author='Yoshiki Shibukawa',
@@ -33,7 +33,7 @@ setup(
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
         'Framework :: Sphinx :: Extension',
-        'Programming Language :: Python :: 3.6'
+        'Programming Language :: Python :: 3.6',
         'Topic :: Documentation',
         'Topic :: Utilities',
     ],

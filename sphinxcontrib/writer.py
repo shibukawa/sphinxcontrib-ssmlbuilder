@@ -570,4 +570,14 @@ class SSMLTranslator(nodes.NodeVisitor):
     def depart_comment(self, node):
         info("depart", node)
 
+    def visit_title_reference(self, node):
+        info("visit", node)
 
+    def depart_title_reference(self, node):
+        info("depart", node)
+
+    def visit_transition(self, node):
+        info("visit", node)
+
+    def depart_transition(self, node):
+        info("depart", node)

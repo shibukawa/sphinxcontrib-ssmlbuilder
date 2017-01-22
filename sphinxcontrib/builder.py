@@ -74,8 +74,7 @@ class SSMLBuilder(Builder):
             if docname not in self.env.all_docs:
                 yield docname
                 continue
-            targetname = self.env.doc2path(docname, self.outdir,
-                                           self.file_list_suffix)
+            targetname = path.join(self.outdir, self.file_transform(docname))
             try:
                 targetmtime = path.getmtime(targetname)
             except Exception:
