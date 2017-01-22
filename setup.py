@@ -16,7 +16,7 @@ requires = [
 
 setup(
     name='sphinxcontrib-ssmlbuilder',
-    version='0.1',
+    version='0.1.1',
     url='https://github.com/shibukawa/sphinxcontrib-ssmlbuilder',
     download_url='http://pypi.python.org/pypi/sphinxcontrib-ssmlbuilder',
     license='BSD',

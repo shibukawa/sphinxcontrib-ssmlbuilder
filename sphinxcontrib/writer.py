@@ -59,10 +59,16 @@ class SSMLTranslator(nodes.NodeVisitor):
         self.destination = destination
         self.docname = docname
         self.basepath = basepath
+        self.state = ['regular']
 
     def add_text(self, text):
         # type: (unicode) -> None
-        self.contents.append([len(text), REGULAR, escape(text)])
+        laststate = self.state[-1]
+        if self.builder.ssml_skip_block.get(laststate, False):
+            # this code block is configured to be skip
+            pass
+        else:
+            self.contents.append([len(text), REGULAR, escape(text)])
 
     def reset_content(self):
         if len(self.contents) == 0:
@@ -475,9 +481,11 @@ class SSMLTranslator(nodes.NodeVisitor):
         info("depart", node)
 
     def visit_table(self, node):
+        self.state.append('table')
         info("visit", node)
 
     def depart_table(self, node):
+        self.state.pop()
         info("depart", node)
 
     def visit_tgroup(self, node):
@@ -559,15 +567,19 @@ class SSMLTranslator(nodes.NodeVisitor):
         info("depart", node)
 
     def visit_container(self, node):
+        self.state.append('codeblock')
         info("visit", node)
 
     def depart_container(self, node):
+        self.state.pop()
         info("depart", node)
 
     def visit_comment(self, node):
+        self.state.append('comment')
         info("visit", node)
 
     def depart_comment(self, node):
+        self.state.pop()
         info("depart", node)
 
     def visit_title_reference(self, node):

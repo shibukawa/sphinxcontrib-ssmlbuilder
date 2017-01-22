@@ -54,6 +54,10 @@ Setting
      * ``"en-US"``
      * SSML speaking language option.
      * `AWS Doc <http://docs.aws.amazon.com/polly/latest/dg/API_Voice.html#polly-Type-Voice-LanguageCode>`_
+   - * ``ssml_skip_block``
+     * ``{'comment': True, 'table': True, 'codeblock': True}``
+     * If the value is True, the content inside the blocks are omitted from resulting SSML.
+     *
    - * ``ssml_break_around_section_title``
      * ``[2000, 1600, 1000, 1000, 1000, 1000]``
      * Break time (millisecond) around section title.

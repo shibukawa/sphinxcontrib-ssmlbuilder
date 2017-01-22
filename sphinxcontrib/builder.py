@@ -33,6 +33,7 @@ class SSMLBuilder(Builder):
     copysource = False
     allow_parallel = True
     ssml_language = 'en-US'
+    ssml_skip_block = {'comment': True, 'table': True, 'codeblock': True}
     ssml_break_around_section_title = [2000, 1600, 1000, 1000, 1000, 1000]
     ssml_break_after_paragraph = 1000
     ssml_emphasis_section_title = ['none', 'none', 'none', 'none', 'none', 'none']
@@ -47,6 +48,8 @@ class SSMLBuilder(Builder):
         """Load necessary templates and perform initialization."""
         if self.config.ssml_language is not None:
             self.ssml_language = self.config.ssml_language
+        if self.config.ssml_skip_block is not None:
+            self.ssml_skip_block = self.config.ssml_skip_block
         if self.config.ssml_break_around_section_title is not None:
             self.ssml_break_around_section_title = self.config.ssml_break_around_section_title
         if self.config.ssml_break_after_paragraph is not None:
