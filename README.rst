@@ -112,6 +112,10 @@ https://github.com/shibukawa/sphinxcontrib-ssmlbuilder
 History
 -------
 
+* 0.1.3 Jan 24 2017
+
+  * Remove extra doublequote in MP3 metadata
+
 * 0.1.2 Jan 24 2017
 
   * Change default speed to ``default``

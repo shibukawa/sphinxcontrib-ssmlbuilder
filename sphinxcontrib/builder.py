@@ -219,12 +219,12 @@ class SSMLBuilder(Builder):
             ensuredir(path.dirname(outfilename))
 
             args = ['ffmpeg', "-y", "-i", "concat:" + "|".join(sources), "-c", "copy",
-                    '-metadata', f'album="{album}"',
-                    '-metadata', f'author="{author}"',
-                    '-metadata', f'title="{title}"',
-                    '-metadata', f'track="{track}"',
-                    '-metadata', 'genre="Audio Book"',
-                    '-metadata', f'year="{year}"',
+                    '-metadata', f'album={album}',
+                    '-metadata', f'author={author}',
+                    '-metadata', f'title={title}',
+                    '-metadata', f'track={track}',
+                    '-metadata', 'genre=Audio Book',
+                    '-metadata', f'year={year}',
                     outfilename]
             #print(args, workdirpath)
             p = subprocess.Popen(args, shell=False, cwd=workdirpath)
