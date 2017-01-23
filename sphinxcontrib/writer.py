@@ -61,13 +61,13 @@ class SSMLTranslator(nodes.NodeVisitor):
         self.basepath = basepath
         self.state = ['regular']
 
+    def active(self):
+        laststate = self.state[-1]
+        return not self.builder.ssml_skip_block.get(laststate, False)
+
     def add_text(self, text):
         # type: (unicode) -> None
-        laststate = self.state[-1]
-        if self.builder.ssml_skip_block.get(laststate, False):
-            # this code block is configured to be skip
-            pass
-        else:
+        if self.active():
             self.contents.append([len(text), REGULAR, escape(text)])
 
     def reset_content(self):
@@ -107,7 +107,7 @@ class SSMLTranslator(nodes.NodeVisitor):
                 middle += "-" + str(i + 1)
             filepath = self.basepath + middle + ".ssml"
             filename = self.docname + middle + ".ssml"
-            sha = hashlib.sha256(output.encode('utf-8')).hexdigest()
+            sha = hashlib.sha1(output.encode('utf-8')).hexdigest()
             self.destination["hashes"][sha] = filename
             self.destination["sequence"].append(sha)
             f = open(filepath, "w")
@@ -168,6 +168,8 @@ class SSMLTranslator(nodes.NodeVisitor):
         pass
 
     def visit_title(self, node):
+        if not self.destination['title']:
+            self.destination['title'] = node.astext()
         level = self.sectionlevel-1
         breaklength = self.builder.ssml_break_around_section_title[level]
         emphasis = self.builder.ssml_emphasis_section_title[level]
@@ -389,7 +391,8 @@ class SSMLTranslator(nodes.NodeVisitor):
 
     def visit_paragraph(self, node):
         # type: (nodes.Node) -> None
-        self.contents.append([0, JOIN_BEFORE, '<break time="%dms" />' % self.builder.ssml_break_after_paragraph])
+        if self.active():
+            self.contents.append([0, JOIN_BEFORE, '<break time="%dms" />' % self.builder.ssml_break_after_paragraph])
         info("visit", node)
 
     def depart_paragraph(self, node):

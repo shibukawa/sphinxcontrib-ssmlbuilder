@@ -67,7 +67,7 @@ Setting
      * Emphasis level of section titles
      * ``"strong"``, ``"moderate"``, ``"none"``, ``"reduced"``
    - * ``ssml_paragraph_speed``
-     * ``"medium"``
+     * ``"default"``
      * Speech speed
      * ``"x-slow"``, ``"slow"``, ``"medium"``, ``"fast"``, ``"x-fast"``, ``"default"``
    - * ``ssml_break_after_paragraph``
@@ -108,3 +108,21 @@ Repository
 -----------
 
 https://github.com/shibukawa/sphinxcontrib-ssmlbuilder
+
+History
+-------
+
+* 0.1.2 Jan 24 2017
+
+  * Change default speed to ``default``
+  * Remove duplicated breaks after paragraphs
+  * Add metadata to resulting MP3 (title, author, track, year, genre)
+
+* 0.1.1 Jan 23 2017
+
+  * Add skipping block option
+
+* 0.1 Jan 23 2017
+
+  * Initial Version
+

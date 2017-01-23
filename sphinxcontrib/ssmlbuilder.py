@@ -22,7 +22,7 @@ def setup(app):
     app.add_config_value('ssml_break_around_section_title', [2000, 1600, 1000, 1000, 1000, 1000], True)
     app.add_config_value('ssml_emphasis_section_title', ['none', 'none', 'none', 'none', 'none', 'none'], True)
     app.add_config_value('ssml_skip_block', {'comment': True, 'table': True, 'codeblock': True}, True)
-    app.add_config_value('ssml_paragraph_speed', 'medium', True)
+    app.add_config_value('ssml_paragraph_speed', 'default', True)
     app.add_config_value('ssml_break_after_paragraph', 1000, True)
     app.add_config_value('ssml_polly_audio_output_folder', "polly", True)
     app.add_config_value('ssml_polly_aws_profile', "", False)
