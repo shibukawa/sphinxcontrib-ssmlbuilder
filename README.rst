@@ -112,6 +112,10 @@ https://github.com/shibukawa/sphinxcontrib-ssmlbuilder
 History
 -------
 
+* 0.2.0 Jan 29 2017
+
+  * Exec AWS API parallelly.
+
 * 0.1.3 Jan 24 2017
 
   * Remove extra doublequote in MP3 metadata

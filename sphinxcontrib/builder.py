@@ -13,6 +13,7 @@
 from docutils.io import StringOutput
 from sphinx.builders import Builder
 from .writer import SSMLWriter
+from .throttling import exectasks
 from sphinx.util.osutil import SEP, os_path, relative_uri, ensuredir, \
     movefile, copyfile
 from sphinx import addnodes
@@ -174,10 +175,12 @@ class SSMLBuilder(Builder):
         # exec polly
         session = Session(profile_name=self.ssml_polly_aws_profile)
         polly = session.client("polly")
-        task = 1 
-        for hashkey in must_convert:
-            print(f"polly.synthesize_speech for {hash2path[hashkey]} ({task}/{len(must_convert)})")
-            task+=1
+        task_count = 1
+
+        def exec_polly(hashkey):
+            nonlocal task_count
+            print(f"polly.synthesize_speech for {hash2path[hashkey]} ({task_count}/{len(must_convert)})")
+            task_count+=1
             ssmlpath = path.join(self.outdir, hash2path[hashkey])
             ssmlsource = open(ssmlpath).read()
             try:
@@ -194,6 +197,8 @@ class SSMLBuilder(Builder):
             mp3file = open(path.join(workdirpath, f"{hashkey}.mp3"), "wb")
             mp3file.write(response.get("AudioStream").read())
             mp3file.close()
+
+        exectasks(10, must_convert, exec_polly)
 
         # metadata
         album = self.config.project
